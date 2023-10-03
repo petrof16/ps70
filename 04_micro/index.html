@@ -13,7 +13,7 @@
       <h4></h4>
       <h4><a class="nav-link" href="../index.html">Home</a></h4>
       <h4><a class="nav-link" href="../about.html">About</a></h4>
-      <h4><a class="nav-link" href="./final_project.html">Final Project</a></h4>      
+      <h4><a class="nav-link" href="./01_intro/index.html">Final Project</a></h4>
     </div>
   </div>
 </nav>
@@ -24,23 +24,55 @@
 <xmp style="display:none;">
 <br> 
 
-#### Week 2: Introduction 
+#### Week 4: Microcontroller Programming 
 
-Testing 1
+I set out to write an Arduino code that would control a servo motor. The servo motor is to behave as a drummer's stick, playing various rhythms. I made sure to write the code in such a way that the tempo can be easily changed without the need for time consuming changes to the code. 
 
-<img src="../images/FAPedal.png"
-alt="rhodespedal" width="220" height="237">
+<code>#include <Servo.h>
 
-Testing 2
+int x=30; //TEMPO
+float m=60/x*1000; 
+float qn=m/4; //quarter note
+float en=m/8; //eighth note
+float sn=m/16; //sixteenth note
+float tsn=m/32; //thirty secondth note
 
-Testing 3
+float den=m/16*3; //dotted sixteenth note
+int servoPin=4;
+int servoU=45;
+int servoD=0;
+Servo myServo;
 
-<img src="../images/insidepiano.jpg"
-alt="inside the piano" width="335" height="251">
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+myServo.attach(servoPin);
+}
 
-<img src="../images/pianopedals.jpg"
-alt="piano pedals" width="334" height="251">
+void loop() {
+  // put your main code here, to run repeatedly:
 
+myServo.write(servoD);
+delay(sn);
+myServo.write(servoU);
+delay(en);
+myServo.write(servoD);
+delay(sn);
+myServo.write(servoU);
+delay(den);
+myServo.write(servoD);
+delay(sn);
+myServo.write(servoU);
+delay(en);
+myServo.write(servoD);
+delay(sn);
+myServo.write(servoU);
+delay(sn);
+myServo.write(servoD);
+delay(sn);
+myServo.write(servoU);
+delay(den);
+}</code>
 
 
 </xmp>
