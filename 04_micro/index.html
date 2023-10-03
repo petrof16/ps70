@@ -30,48 +30,48 @@ I set out to write an Arduino code that would control a servo motor. The servo m
 
 <code>#include <Servo.h>
 
-int x=30; //TEMPO
-float m=60/x*1000; 
-float qn=m/4; //quarter note
-float en=m/8; //eighth note
-float sn=m/16; //sixteenth note
-float tsn=m/32; //thirty secondth note
+int x=30; //TEMPO <br>
+float m=60/x*1000; <br>
+float qn=m/4; //quarter note<br>
+float en=m/8; //eighth note<br>
+float sn=m/16; //sixteenth note<br>
+float tsn=m/32; //thirty secondth note<br>
 
-float den=m/16*3; //dotted sixteenth note
-int servoPin=4;
-int servoU=45;
-int servoD=0;
-Servo myServo;
+float den=m/16*3; //dotted sixteenth note<br>
+int servoPin=4;<br>
+int servoU=45;<br>
+int servoD=0;<br>
+Servo myServo;<br>
 
-void setup() {
-  // put your setup code here, to run once:
-  Serial.begin(9600);
-myServo.attach(servoPin);
-}
-
-void loop() {
-  // put your main code here, to run repeatedly:
-
-myServo.write(servoD);
-delay(sn);
-myServo.write(servoU);
-delay(en);
-myServo.write(servoD);
-delay(sn);
-myServo.write(servoU);
-delay(den);
-myServo.write(servoD);
-delay(sn);
-myServo.write(servoU);
-delay(en);
-myServo.write(servoD);
-delay(sn);
-myServo.write(servoU);
-delay(sn);
-myServo.write(servoD);
-delay(sn);
-myServo.write(servoU);
-delay(den);
+void setup() {<br>
+  // put your setup code here, to run once:<br>
+  Serial.begin(9600);<br>
+myServo.attach(servoPin);<br>
+}<br>
+<br>
+void loop() {<br>
+  // put your main code here, to run repeatedly:<br>
+<br>
+myServo.write(servoD);<br>
+delay(sn);<br>
+myServo.write(servoU);<br>
+delay(en);<br>
+myServo.write(servoD);<br>
+delay(sn);<br>
+myServo.write(servoU);<br>
+delay(den);<br>
+myServo.write(servoD);<br>
+delay(sn);<br>
+myServo.write(servoU);<br>
+delay(en);<br>
+myServo.write(servoD);<br>
+delay(sn);<br>
+myServo.write(servoU);<br>
+delay(sn);<br>
+myServo.write(servoD);<br>
+delay(sn);<br>
+myServo.write(servoU);<br>
+delay(den);<br>
 }</code>
 
 
