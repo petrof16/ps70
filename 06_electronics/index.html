@@ -40,11 +40,13 @@ I needed to use an 6n138 optocoupler chip. Inside of this little chip there is a
 
 The Midi jack has 5 pin connections; I connected to pins 4 and 5 to transmit the Midi note messages.
 
-On the coding end, I needed to use the Arduino MIDI Library. The easiest way of seeing if I was receiving the MIDI data, was to have the built in LED on pin 13, which looks like this:
+On the coding end, I needed to use the <a href="https://fortyseveneffects.github.io/arduino_midi_library/a00032.html">Arduino MIDI Library</a> . The easiest way of seeing if I was receiving the MIDI data, was to have the built in LED on pin 13, which looks like this:
 
 <code>
 
-  #include <MIDI.h>  // Add Midi Library
+
+
+#include <MIDI.h>  // Add Midi Library
 
 #define LED 13
 
