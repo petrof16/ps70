@@ -26,7 +26,9 @@
 
 #### Week 6: Electronic Input Devices 
 
-Because it is difficult to be able to practice my piano during the day (due to my toddler son insisting that I either stop and play with him, or that he be the one playing the piano), I recently had the QuietTime ProRecord module added to my acoustic grand piano. Through a series of infra red leds tucked underneath the keybed, it is possible to read the velocity of the key strikes. From these data, MIDI (musical instrument digital interface) messages can be sent out. This video was very helpful: <iframe width="560" height="315" src="https://www.youtube.com/embed/GxfHijjn0ZM?si=Q7P259rDan8Gae88" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+Because it is difficult to be able to practice my piano during the day (due to my toddler son insisting that I either stop and play with him, or that he be the one playing the piano), I recently had the QuietTime ProRecord module added to my acoustic grand piano. Through a series of infra red leds tucked underneath the keybed, it is possible to read the velocity of the key strikes. From these data, MIDI (musical instrument digital interface) messages can be sent out. This video was very helpful:
+
+ <iframe width="560" height="315" src="https://www.youtube.com/embed/GxfHijjn0ZM?si=Q7P259rDan8Gae88" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 I used the arduino uno to behave as an input, receiving the MIDI out messages that get sent out from the piano. 
 
@@ -38,7 +40,7 @@ I needed to use an 6n138 optocoupler chip. Inside of this little chip there is a
 
 The Midi jack has 5 pin connections; I connected to pins 4 and 5 to transmit the Midi note messages.
 
-On the coding end, I needed to use the Arduino MIDI Library. 
+On the coding end, I needed to use the Arduino MIDI Library. The easiest way of seeing if I was receiving the MIDI data, was to have the built in LED 
 
 
 
