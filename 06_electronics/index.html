@@ -43,10 +43,9 @@ The Midi jack has 5 pin connections; I connected to pins 4 and 5 to transmit the
 On the coding end, I needed to use the <a href="https://fortyseveneffects.github.io/arduino_midi_library/a00032.html">Arduino MIDI Library</a> . The easiest way of seeing if I was receiving the MIDI data, was to have the built in LED on pin 13, which looks like this:
 
 <code>
+// Code for MIDI in Circuit:
 
-
-
-#include <MIDI.h>  // Add Midi Library
+#include <MIDI.h>  
 
 #define LED 13
 
