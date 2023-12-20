@@ -13,7 +13,7 @@
       <h4></h4>
       <h4><a class="nav-link" href="../index.html">Home</a></h4>
       <h4><a class="nav-link" href="../about.html">About</a></h4>
-      <h4><a class="nav-link" href="./07_electricsout/index.html">Final Project</a></h4>      
+<h4><a class="nav-link" href="./01_intro/index.html">Final Project</a></h4>
     </div>
   </div>
 </nav>
@@ -24,9 +24,47 @@
 <xmp style="display:none;">
 <br> 
 
-#### Week 7: Electronic Output Devices 
+#### Week 7: Electronic Output Devices
 
-Testing 1
+After being able to have the MIDI input data from my piano, the next step was to use this MIDI information to trigger a solenoid accordingly. When the solenoid is placed over the piano strings at a specific node (1/2 = an octave higher than normally sounding string, 1/3 =  an octave and a fifth higher than a normally sounding string, 1/4 etc... ) we should hear the harmonic. The right amount of pressure had to be applied to the string and then released milliseconds later to let the string vibrate. This is what the code looks like:
+
+<code>
+
+
+
+#include <MIDI.h>
+
+#define SOLENOID_PIN 9 // Define the pin connected to the solenoid
+
+MIDI_CREATE_DEFAULT_INSTANCE();
+
+void setup() {
+  pinMode(SOLENOID_PIN, OUTPUT); // Set solenoid pin as output
+  MIDI.begin(MIDI_CHANNEL_OMNI); // Initialize MIDI library to listen to all channels
+  MIDI.setHandleNoteOn(MyHandleNoteOn); // Set function for handling Note On messages
+  MIDI.setHandleNoteOff(MyHandleNoteOff); // Set function for handling Note Off messages
+}
+
+void loop() {
+  MIDI.read(); // Check for incoming MIDI messages
+}
+
+void MyHandleNoteOn(byte channel, byte pitch, byte velocity) {
+  delay(100);
+  digitalWrite(SOLENOID_PIN, LOW); // Activate the solenoid when a note is played
+}
+
+void MyHandleNoteOff(byte channel, byte pitch, byte velocity) {
+  digitalWrite(SOLENOID_PIN, HIGH); // Deactivate the solenoid when the note is released
+}
+
+
+
+}</code>
+
+
+
+I 3D printed a few pieces to be able to suspend the solenoid 
 
 <img src="../images/FAPedal.png"
 alt="rhodespedal" width="220" height="237">
@@ -35,8 +73,7 @@ Testing 2
 
 Testing 3
 
-<img src="../images/insidepiano.jpg"
-alt="inside the piano" width="335" height="251">
+<img src="../images/insidepiano.jpg" alt="inside the piano" width="335" height="251">
 
 <img src="../images/pianopedals.jpg"
 alt="piano pedals" width="334" height="251">
