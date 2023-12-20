@@ -22,9 +22,15 @@
 
 
 Final Project: 
-  I retrofit an old 25 key keyboard in order to be able to harvest voltage, turning the kinetic energy from the pressing of the keys, into voltage.
+  I hacked an old 25 key keyboard to harvesting electricity by turning the kinetic energy from the pressing of the keys, into voltage.
 
-  
+  I hot glued 12mm piezos to the bottom of each key so that when the keys were pressed, a small amount of voltage would be created by the piezos. The electrons in the crystals within the piezos are squished together and then return to their previous physical location. This slight moving of the electrons is what creates the electricity. 
+
+  It started looking like this:
+
+  <img src="../images/00 A start.jpeg" alt="the beginning" width="484" height="363">
+
+
 Research:
 
 <div class="container-fluid bg-6 text-center">
@@ -57,6 +63,66 @@ Materials:
 (45) 23mm piezo(s)
 
 (1) Rechargeable Battery 3.7 Volt 3500mAhFlat Top Battery High Capacity
+
+Code: 
+
+<code>#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
+
+// Define the analog input pins connected to the capacitors
+const int C1_E1_PIN = A0;   // Analog pin for Capacitor 1
+const int F1_A1_PIN = A1;   // Analog pin for Capacitor 2
+const int Bb1_D2_PIN = A2;  // Analog pin for Capacitor 3
+const int Eb2_C3_PIN = A3;  // Analog pin for Capacitor 4
+
+// LCD configuration
+LiquidCrystal_I2C lcd(0x27, 16, 2); // I2C address 0x27, 16 columns, 2 rows
+
+void setup() {
+  Wire.begin(); // Initialize I2C communication
+  lcd.init();
+  lcd.backlight();
+  lcd.clear(); // Clear the LCD initially
+
+  // Set the analog reference to the default (usually 3.3V for most Arduino boards)
+  analogReference(DEFAULT);
+
+  // Other setup code if needed
+}
+
+void loop() {
+  // Read voltage across each capacitor
+  float voltage_C1_E1 = analogRead(C1_E1_PIN) * (3.3 / 1023); // Adjust the voltage calculation as per your circuit
+  float voltage_F1_A1 = analogRead(F1_A1_PIN) * (3.3 / 1023);
+  float voltage_Bb1_D2 = analogRead(Bb1_D2_PIN) * (3.3 / 1023);
+  float voltage_Eb2_C3 = analogRead(Eb2_C3_PIN) * (3.3 / 1023);
+
+  // Display voltages on the LCD
+  lcd.setCursor(0, 0);
+  lcd.print("1 ");
+  lcd.print(voltage_C1_E1, 2);
+  lcd.print("V  ");
+
+  lcd.setCursor(8, 0); // Set cursor to position 10 on the top line
+  lcd.print("2 ");
+  lcd.print(voltage_F1_A1, 2);
+  lcd.print("V  ");
+
+  lcd.setCursor(0, 1);
+  lcd.print("3 ");
+  lcd.print(voltage_Bb1_D2, 2);
+  lcd.print("V  ");
+
+  lcd.setCursor(8, 1); // Set cursor to position 10 on the bottom line
+  lcd.print("4 ");
+  lcd.print(voltage_Eb2_C3, 2);
+  lcd.print("V  ");
+
+  delay(1000); // Adjust the delay as needed between readings
+}
+
+}</code>
+
 
 </xmp>
 </body>
