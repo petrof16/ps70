@@ -42,50 +42,34 @@ The Midi jack has 5 pin connections; I connected to pins 4 and 5 to transmit the
 
 On the coding end, I needed to use the Arduino MIDI Library. The easiest way of seeing if I was receiving the MIDI data, was to have the built in LED on pin 13, which looks like this:
 
-<code>#include Servo.h
+<code>
 
-int x=30; //TEMPO <br>
-float m=60/x*1000; <br>
-float qn=m/4; //quarter note<br>
-float en=m/8; //eighth note<br>
-float sn=m/16; //sixteenth note<br>
-float tsn=m/32; //thirty secondth note<br>
+  #include <MIDI.h>  // Add Midi Library
 
-float den=m/16*3; //dotted sixteenth note<br>
-int servoPin=4;<br>
-int servoU=45;<br>
-int servoD=0;<br>
-Servo myServo;<br>
+#define LED 13
 
-void setup() {<br>
-  // put your setup code here, to run once:<br>
-  Serial.begin(9600);<br>
-myServo.attach(servoPin);<br>
-}<br>
-<br>
-void loop() {<br>
-  // put your main code here, to run repeatedly:<br>
-<br>
-myServo.write(servoD);<br>
-delay(sn);<br>
-myServo.write(servoU);<br>
-delay(en);<br>
-myServo.write(servoD);<br>
-delay(sn);<br>
-myServo.write(servoU);<br>
-delay(den);<br>
-myServo.write(servoD);<br>
-delay(sn);<br>
-myServo.write(servoU);<br>
-delay(en);<br>
-myServo.write(servoD);<br>
-delay(sn);<br>
-myServo.write(servoU);<br>
-delay(sn);<br>
-myServo.write(servoD);<br>
-delay(sn);<br>
-myServo.write(servoU);<br>
-delay(den);<br>
+MIDI_CREATE_DEFAULT_INSTANCE();
+
+void setup() {
+  pinMode (LED, OUTPUT); 
+  MIDI.begin(MIDI_CHANNEL_OMNI); // Listens to all midi channels
+
+  MIDI.setHandleNoteOn(MyHandleNoteOn); 
+  MIDI.setHandleNoteOff(MyHandleNoteOff); 
+}
+
+void loop() {
+  MIDI.read(); // Constantly checks to see if Midi data has been received.
+}
+
+void MyHandleNoteOn(byte channel, byte pitch, byte velocity) { 
+  digitalWrite(LED,HIGH);
+}
+
+void MyHandleNoteOff(byte channel, byte pitch, byte velocity) { 
+  digitalWrite(LED,LOW); 
+}
+
 }</code>
 
 
